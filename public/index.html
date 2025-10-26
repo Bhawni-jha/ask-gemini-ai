@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask Gemini AI - Powered by Google</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * { font-family: 'Inter', sans-serif; }
+        
+        /* Animated gradient background */
+        body {
+            background: linear-gradient(-45deg, #0f172a, #1e1b4b, #312e81, #1e293b);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Glass morphism effect */
+        .glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+        
+        /* Custom scrollbar */
+        .custom-scroll::-webkit-scrollbar { width: 10px; }
+        .custom-scroll::-webkit-scrollbar-thumb { 
+            background: linear-gradient(180deg, #6366f1, #8b5cf6);
+            border-radius: 10px;
+        }
+        .custom-scroll::-webkit-scrollbar-track { 
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 10px;
+        }
+        
+        /* Pulse animation for AI thinking */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        /* Fade in animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        /* Enhanced prose styling */
+        .prose h2 { 
+            color: #a5b4fc; 
+            font-weight: 700; 
+            font-size: 1.5rem; 
+            margin-top: 1.5rem; 
+            margin-bottom: 0.75rem;
+        }
+        .prose h3 { 
+            color: #c7d2fe; 
+            font-weight: 600; 
+            font-size: 1.25rem; 
+            margin-top: 1.25rem; 
+            margin-bottom: 0.5rem;
+        }
+        .prose p { 
+            margin-bottom: 1rem; 
+            line-height: 1.7;
+            color: #e2e8f0;
+        }
+        .prose strong { 
+            color: #818cf8; 
+            font-weight: 600;
+        }
+        .prose code { 
+            color: #fbbf24; 
+            background-color: #374151; 
+            padding: 2px 6px; 
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        .prose pre { 
+            background-color: #1e293b; 
+            padding: 1rem; 
+            border-radius: 8px; 
+            overflow-x: auto;
+            border: 1px solid #334155;
+        }
+        .prose ul, .prose ol { 
+            margin-left: 1.5rem; 
+            margin-bottom: 1rem;
+        }
+        .prose li { 
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+        .prose a { 
+            color: #6366f1; 
+            text-decoration: underline;
+            transition: color 0.2s;
+        }
+        .prose a:hover { 
+            color: #818cf8;
+        }
+        .prose blockquote {
+            border-left: 4px solid #6366f1;
+            padding-left: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
+            color: #cbd5e1;
+        }
+        
+        /* Shimmer effect for loading */
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+        
+        .shimmer {
+            background: linear-gradient(90deg, 
+                rgba(99, 102, 241, 0.1) 0%, 
+                rgba(99, 102, 241, 0.3) 50%, 
+                rgba(99, 102, 241, 0.1) 100%);
+            background-size: 1000px 100%;
+            animation: shimmer 2s infinite;
+        }
+        
+        /* Glow effect */
+        .glow {
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+        }
+    </style>
+</head>
+<body class="text-gray-100 min-h-screen">
+    <!-- Particle background effect -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl -top-48 -left-48"></div>
+        <div class="absolute w-96 h-96 bg-purple-500/10 rounded-full blur-3xl -bottom-48 -right-48"></div>
+    </div>
+
+    <div id="app" class="relative z-10 flex flex-col min-h-screen p-4 sm:p-6 lg:p-8">
+        
+        <!-- Header with improved design -->
+        <header class="text-center mb-6 sm:mb-8 fade-in">
+            <div class="flex items-center justify-center gap-3 mb-3">
+                <div class="text-5xl sm:text-6xl">🤖</div>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    Ask Gemini AI
+                </h1>
+            </div>
+            <p class="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">
+                Powered by Google's Gemini AI with real-time Google Search grounding
+            </p>
+            <div class="flex items-center justify-center gap-2 mt-3">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-green-500/10 border border-green-500/20 rounded-full text-green-400 text-xs font-medium">
+                    <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                    Online
+                </span>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400 text-xs font-medium">
+                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                    </svg>
+                    Secure Backend
+                </span>
+                <span id="conversationIndicator" class="hidden items-center gap-1.5 px-3 py-1 bg-purple-500/10 border border-purple-500/20 rounded-full text-purple-400 text-xs font-medium">
+                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span id="conversationCount">0</span> turns
+                </span>
+                <button id="clearHistoryBtn" class="hidden items-center gap-1.5 px-3 py-1 bg-red-500/10 border border-red-500/20 rounded-full text-red-400 text-xs font-medium hover:bg-red-500/20 transition-all duration-200">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                    </svg>
+                    Clear Chat
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content Area with max-width constraint -->
+        <div class="flex flex-col flex-grow min-h-0 max-w-5xl w-full mx-auto">
+            
+            <!-- Response Area with glass effect -->
+            <div id="responseArea" class="flex-grow glass p-4 sm:p-6 lg:p-8 mb-4 sm:mb-6 rounded-2xl shadow-2xl overflow-y-auto custom-scroll transition-all duration-300 hover:shadow-indigo-500/10">
+                
+                <!-- Loading Indicator with better animation -->
+                <div id="loadingIndicator" class="hidden">
+                    <div class="flex items-start gap-3 mb-4">
+                        <div class="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full flex items-center justify-center shimmer">
+                            <svg class="w-5 h-5 text-white animate-spin" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-indigo-400 font-medium mb-2">✨ AI is thinking...</p>
+                            <div class="space-y-2">
+                                <div class="h-3 bg-gray-700/50 rounded-full w-3/4 shimmer"></div>
+                                <div class="h-3 bg-gray-700/50 rounded-full w-full shimmer"></div>
+                                <div class="h-3 bg-gray-700/50 rounded-full w-2/3 shimmer"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Placeholder with better styling -->
+                <div id="placeholderText" class="flex flex-col items-center justify-center h-full text-center py-12">
+                    <div class="text-6xl mb-4 opacity-50">💭</div>
+                    <p class="text-gray-400 text-lg mb-2">Ask me anything!</p>
+                    <p class="text-gray-500 text-sm max-w-md">
+                        Try questions like "What's the latest in AI?" or "Explain quantum computing"
+                    </p>
+                </div>
+                
+                <!-- Response Text with enhanced styling -->
+                <div id="responseText" class="prose prose-invert max-w-none fade-in">
+                    <!-- AI response content will be dynamically injected here -->
+                </div>
+            </div>
+
+            <!-- Input Form with improved design -->
+            <div class="glass p-4 sm:p-5 rounded-2xl shadow-2xl glow">
+                <form id="queryForm" class="flex flex-col sm:flex-row sm:items-start gap-3">
+                    <div class="flex-grow relative">
+                        <textarea id="queryInput"
+                                  class="w-full min-h-[3.5rem] p-3 sm:p-4 text-gray-200 bg-gray-800/50 border border-gray-700 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none placeholder-gray-500 transition-all duration-200 hover:bg-gray-800/70"
+                                  placeholder="Ask me anything... (e.g., 'What are the latest AI developments?')"
+                                  rows="1"
+                                  required></textarea>
+                        <div class="absolute bottom-2 right-2 text-xs text-gray-600">
+                            Press Enter to send
+                        </div>
+                    </div>
+
+                    <button type="submit" id="submitButton"
+                            class="sm:w-36 h-[3.5rem] px-6 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold rounded-xl shadow-lg transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-indigo-500/50 disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center"
+                            >
+                        <span id="buttonText" class="flex items-center justify-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                            Ask AI
+                        </span>
+                        <!-- Enhanced Spinner -->
+                        <svg id="spinner" class="animate-spin h-5 w-5 text-white mx-auto hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                    </button>
+                </form>
+                
+                <!-- Quick suggestions -->
+                <div id="suggestions" class="mt-3 flex flex-wrap gap-2">
+                    <button type="button" class="quick-suggestion text-xs px-3 py-1.5 bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700 rounded-lg text-gray-400 hover:text-gray-300 transition-colors duration-200">
+                        💡 Explain quantum computing
+                    </button>
+                    <button type="button" class="quick-suggestion text-xs px-3 py-1.5 bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700 rounded-lg text-gray-400 hover:text-gray-300 transition-colors duration-200">
+                        📰 Latest AI news
+                    </button>
+                    <button type="button" class="quick-suggestion text-xs px-3 py-1.5 bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700 rounded-lg text-gray-400 hover:text-gray-300 transition-colors duration-200">
+                        🚀 Future of technology
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <footer class="text-center mt-6 text-xs text-gray-500">
+            <p>Built with ❤️ using Node.js, Express & Google Gemini AI</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
